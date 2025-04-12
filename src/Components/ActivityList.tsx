@@ -1,24 +1,13 @@
 import { PencilIcon, XCircleIcon } from "@heroicons/react/24/outline"
-import { Dispatch, useMemo } from "react"
-import { categories } from "../data/categories"
-import { ActivityActions } from "../reducers/activityreducer"
-import { Activity } from "../types"
-
-type ActivityListProps = {
-
-    activities: Activity[],
-    dispatch : Dispatch<ActivityActions>
-}
-
-function ActivityList({ activities,dispatch }: ActivityListProps) {
-
-    const categoryName = useMemo(() => (category: Activity['category']) =>
-        categories.map(cat => cat.id === category ? cat.name : "")
-
-        , [activities])
+import { useActivity } from "../hooks/use-Activity"
 
 
-     const isEmptyActivities = useMemo(()=> activities.length===0 ,[activities])   
+
+function ActivityList() {
+
+    const {state,dispatch,isEmptyActivities,categoryName}= useActivity()
+    const {activities} = state
+
     return (
         <>
             <h2 className="text-4xl font-bold text-slate-600 text-center">Food and activities</h2>
